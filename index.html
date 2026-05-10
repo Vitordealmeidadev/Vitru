@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitru</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     TELA 1 — SELEÇÃO DE PERFIL
+══════════════════════════════════════ -->
+<div id="screen-profiles" class="screen active">
+  <div class="profiles-logo">VITRU</div>
+  <div class="profiles-wrap">
+    <div class="profiles-title">Quem está assistindo?</div>
+    <div class="profiles-grid" id="profiles-grid">
+      <!-- Perfis renderizados pelo app.js -->
+    </div>
+    <button class="profiles-manage-btn" onclick="goToCreate()">Gerenciar Perfis</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TELA 2 — CRIAR PERFIL
+══════════════════════════════════════ -->
+<div id="screen-create" class="screen">
+  <div class="create-logo">VITRU</div>
+  <div class="create-wrap">
+
+    <div class="create-header">
+      <button class="back-btn" onclick="goToProfiles()">←</button>
+      <div class="create-title">Novo Perfil</div>
+    </div>
+
+    <!-- Seletor de avatar -->
+    <div class="avatar-picker-section">
+      <div class="avatar-preview-big av-1" id="avatar-preview">
+        <span id="avatar-initial">?</span>
+      </div>
+      <div class="avatar-colors">
+        <div class="av-swatch av-1 selected" data-theme="av-1" onclick="selectTheme(this)"></div>
+        <div class="av-swatch av-2"           data-theme="av-2" onclick="selectTheme(this)"></div>
+        <div class="av-swatch av-3"           data-theme="av-3" onclick="selectTheme(this)"></div>
+        <div class="av-swatch av-4"           data-theme="av-4" onclick="selectTheme(this)"></div>
+        <div class="av-swatch av-5"           data-theme="av-5" onclick="selectTheme(this)"></div>
+        <div class="av-swatch av-6"           data-theme="av-6" onclick="selectTheme(this)"></div>
+      </div>
+    </div>
+
+    <!-- Nome do perfil -->
+    <div class="form-group">
+      <label class="form-label">Nome do Perfil</label>
+      <input
+        class="form-input"
+        id="profile-name-input"
+        type="text"
+        placeholder="Ex: Casa, Filhos, Trabalho..."
+        maxlength="20"
+        oninput="updateAvatarInitial(this.value)"
+      >
+    </div>
+
+    <!-- Toggle perfil infantil -->
+    <div class="form-group">
+      <div class="kid-toggle" onclick="toggleKids()">
+        <div>
+          <div class="kid-label">Perfil Infantil</div>
+          <div class="kid-sub">Mostrar só conteúdo adequado para crianças</div>
+        </div>
+        <div class="toggle-switch" id="kids-toggle">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="create-actions">
+      <button class="btn-primary"   onclick="saveProfile()">Salvar Perfil</button>
+      <button class="btn-secondary" onclick="goToProfiles()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TELA 3 — PÁGINA PRINCIPAL
+══════════════════════════════════════ -->
+<div id="screen-main" class="screen">
+
+  <!-- Navbar fixa -->
+  <nav id="navbar">
+    <div class="logo">VITRU</div>
+    <ul class="nav-links">
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Séries</a></li>
+      <li><a href="#">Filmes</a></li>
+      <li><a href="#">Novidades</a></li>
+      <li><a href="#">Minha Lista</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-icon">🔔</span>
+      <!-- Avatar do perfil ativo + dropdown -->
+      <div class="nav-user">
+        <div class="nav-avatar" id="nav-avatar" onclick="toggleDropdown()"></div>
+        <div class="nav-dropdown" id="nav-dropdown">
+          <div id="dropdown-profiles-list">
+            <!-- Perfis injetados pelo app.js -->
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item" onclick="closeDropdown(); goToCreate()">+ Adicionar Perfil</div>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item" onclick="closeDropdown(); goToProfiles()">Trocar Perfil</div>
+          <div class="dropdown-item red">Sair da Vitru</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero banner -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles"></div>
+
+    <!-- Colagem de cards ao fundo (decorativa) -->
+    <div class="film-strip">
+      <div class="film-col">
+        <div class="film-card g1" style="height:180px"></div>
+        <div class="film-card g3" style="height:150px"></div>
+        <div class="film-card g5" style="height:200px"></div>
+        <div class="film-card g7" style="height:140px"></div>
+        <div class="film-card g9" style="height:170px"></div>
+      </div>
+      <div class="film-col">
+        <div class="film-card g2"  style="height:160px"></div>
+        <div class="film-card g4"  style="height:190px"></div>
+        <div class="film-card g6"  style="height:145px"></div>
+        <div class="film-card g8"  style="height:185px"></div>
+        <div class="film-card g10" style="height:155px"></div>
+      </div>
+      <div class="film-col">
+        <div class="film-card g11" style="height:175px"></div>
+        <div class="film-card g1"  style="height:165px"></div>
+        <div class="film-card g12" style="height:190px"></div>
+        <div class="film-card g3"  style="height:150px"></div>
+        <div class="film-card g6"  style="height:180px"></div>
+      </div>
+    </div>
+
+    <!-- Conteúdo do hero -->
+    <div class="hero-content">
+      <div class="hero-tag">★ Em Destaque</div>
+      <div class="hero-title">O ÚLTIMO<br><span>HORIZONTE</span></div>
+      <div class="hero-desc">
+        Um drama épico sobre sobrevivência, traição e redenção em um mundo
+        à beira do colapso. Baseado no best-seller mundial.
+      </div>
+      <div class="hero-meta">
+        <span class="match">97% relevante</span>
+        <span class="rating-badge">16+</span>
+        <span style="color:var(--text-muted);font-size:0.82rem">2025 · 2 Temporadas · Drama</span>
+      </div>
+      <div class="hero-buttons">
+        <button class="btn-play">▶ Assistir</button>
+        <button class="btn-info">ℹ Mais Informações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seções de conteúdo -->
+  <div class="sections">
+
+    <!-- Faixa destaque Originals -->
+    <div class="featured-strip">
+      <div class="strip-icon">🎬</div>
+      <div class="strip-text">
+        <h3>Vitru Originals — Novos episódios toda semana</h3>
+        <p>Produções exclusivas criadas por diretores premiados. Só na Vitru.</p>
+      </div>
+      <button class="strip-btn">Ver Originais</button>
+    </div>
+
+    <!-- Filtro de categorias -->
+    <div class="categories">
+      <button class="cat-btn active">Tudo</button>
+      <button class="cat-btn">Ação</button>
+      <button class="cat-btn">Drama</button>
+      <button class="cat-btn">Comédia</button>
+      <button class="cat-btn">Terror</button>
+      <button class="cat-btn">Sci-Fi</button>
+      <button class="cat-btn">Documentário</button>
+      <button class="cat-btn">Animação</button>
+    </div>
+
+    <!-- Continuar Assistindo -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Continuar Assistindo</div>
+        <div class="section-more">Ver tudo ›</div>
+      </div>
+      <div class="cards-row">
+        <div class="card card-wide"><div class="card-inner g3"><div class="card-gradient"></div><div class="card-label">Último Horizonte</div></div></div>
+        <div class="card card-wide"><div class="card-inner g4"><div class="card-gradient"></div><div class="card-label">Cidade Invisível</div></div></div>
+        <div class="card card-wide"><div class="card-inner g2"><div class="card-gradient"></div><div class="card-badge">Novo ep.</div><div class="card-label">Olhar do Mar</div></div></div>
+        <div class="card card-wide"><div class="card-inner g7"><div class="card-gradient"></div><div class="card-label">Sombras do Sul</div></div></div>
+        <div class="card card-wide"><div class="card-inner g5"><div class="card-gradient"></div><div class="card-label">Raízes</div></div></div>
+        <div class="card card-wide"><div class="card-inner g9"><div class="card-gradient"></div><div class="card-label">O Exílio</div></div></div>
+      </div>
+    </div>
+
+    <!-- Originais Vitru -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title" style="color:var(--red)">Originais Vitru</div>
+        <div class="section-more">Ver tudo ›</div>
+      </div>
+      <div class="cards-row">
+        <div class="card card-tall"><div class="card-inner g1"><div class="card-gradient"></div><div class="card-label">Abismo</div></div></div>
+        <div class="card card-tall"><div class="card-inner g6"><div class="card-gradient"></div><div class="card-badge">Novo</div><div class="card-label">Vertigem</div></div></div>
+        <div class="card card-tall"><div class="card-inner g3"><div class="card-gradient"></div><div class="card-label">Pulso</div></div></div>
+        <div class="card card-tall"><div class="card-inner g8"><div class="card-gradient"></div><div class="card-label">Deriva</div></div></div>
+        <div class="card card-tall"><div class="card-inner g2"><div class="card-gradient"></div><div class="card-label">Fenda</div></div></div>
+        <div class="card card-tall"><div class="card-inner g12"><div class="card-gradient"></div><div class="card-badge">Novo</div><div class="card-label">Eclipse</div></div></div>
+        <div class="card card-tall"><div class="card-inner g4"><div class="card-gradient"></div><div class="card-label">Limiar</div></div></div>
+      </div>
+    </div>
+
+    <!-- Top 10 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Top 10 no Brasil Hoje</div>
+        <div class="section-more">Ver tudo ›</div>
+      </div>
+      <div class="cards-row">
+        <div class="card card-wide" style="overflow:visible"><div class="card-rank">1</div><div class="card-inner g3" style="border-radius:4px"><div class="card-gradient"></div><div class="card-label">Último Horizonte</div></div></div>
+        <div class="card card-wide" style="overflow:visible"><div class="card-rank">2</div><div class="card-inner g6" style="border-radius:4px"><div class="card-gradient"></div><div class="card-label">Vertigem</div></div></div>
+        <div class="card card-wide" style="overflow:visible"><div class="card-rank">3</div><div class="card-inner g1" style="border-radius:4px"><div class="card-gradient"></div><div class="card-label">Abismo</div></div></div>
+        <div class="card card-wide" style="overflow:visible"><div class="card-rank">4</div><div class="card-inner g9" style="border-radius:4px"><div class="card-gradient"></div><div class="card-label">Eclipse</div></div></div>
+        <div class="card card-wide" style="overflow:visible"><div class="card-rank">5</div><div class="card-inner g5" style="border-radius:4px"><div class="card-gradient"></div><div class="card-label">Raízes</div></div></div>
+      </div>
+    </div>
+
+    <!-- Em Breve -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Em Breve</div>
+        <div class="section-more">Ver tudo ›</div>
+      </div>
+      <div class="cards-row">
+        <div class="card card-wide"><div class="card-inner g11"><div class="card-gradient"></div><div class="card-badge">Jun</div><div class="card-label">A Queda</div></div></div>
+        <div class="card card-wide"><div class="card-inner g7"><div class="card-gradient"></div><div class="card-badge">Jun</div><div class="card-label">Zona Cinzenta</div></div></div>
+        <div class="card card-wide"><div class="card-inner g10"><div class="card-gradient"></div><div class="card-badge">Jul</div><div class="card-label">Memórias Digitais</div></div></div>
+        <div class="card card-wide"><div class="card-inner g4"><div class="card-gradient"></div><div class="card-badge">Jul</div><div class="card-label">Ressonância</div></div></div>
+        <div class="card card-wide"><div class="card-inner g12"><div class="card-gradient"></div><div class="card-badge">Ago</div><div class="card-label">Silêncio Branco</div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /sections -->
+
+  <footer>
+    <div class="footer-logo">VITRU</div>
+    <div class="footer-links">
+      <a href="#">Áudio e Legendas</a>
+      <a href="#">Central de Ajuda</a>
+      <a href="#">Planos</a>
+      <a href="#">Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Contato</a>
+    </div>
+    <div class="footer-copy">© 2026 Vitru Entretenimento · Projeto conceitual de interface streaming · Desenvolvido por Vitor Almeida</div>
+  </footer>
+
+</div><!-- /screen-main -->
+
+<!-- Toast de notificação -->
+<div class="toast" id="toast"></div>
+
+<!-- Script -->
+<script src="js/app.js"></script>
+</body>
+</html>
