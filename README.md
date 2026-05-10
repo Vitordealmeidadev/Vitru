@@ -1,6 +1,6 @@
 # 🎬 Vitru
 
-Interface moderna de streaming desenvolvida para estudo de front-end, inspirada em plataformas como Netflix.
+Interface moderna de streaming desenvolvida para estudo de front-end, inspirada em plataformas de streaming
 
 O projeto foi construído utilizando apenas HTML, CSS e JavaScript puro, focando em:
 - UI/UX
