@@ -4,8 +4,8 @@
 
 // ── STATE ──
 let profiles = [
-  { name: 'Vitão',  theme: 'av-1', kids: false },
-  { name: 'Yasmin', theme: 'av-2', kids: false },
+  { name: 'Vitor',  theme: 'av-1', kids: false },
+  { name: 'Ana', theme: 'av-2', kids: false },
   { name: 'Kids',  theme: 'av-3', kids: true  },
 ];
 let activeProfile = null;
