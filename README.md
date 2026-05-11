@@ -32,6 +32,23 @@ vitru/
 
 Basta abrir o arquivo `index.html` no navegador.
 
+## ✨ Funcionalidades
+
+- Seleção e troca de perfis
+- Criar novo perfil
+- Dropdown de usuário
+- Toast de boas-vindas
+- Navbar dinâmica
+- Filtro interativo
+- Hover animado
+- HTML/CSS/JS puro
+
+## 🛠️ Tecnologias
+
+- HTML5
+- CSS3
+- JavaScript
+
 ## 📸 Preview
 
 Interface da página principal da plataforma Vitru:
