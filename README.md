@@ -9,6 +9,9 @@ O projeto foi construído utilizando apenas HTML, CSS e JavaScript puro, focando
 - interações visuais
 - manipulação de DOM
 
+  
+👉 **[Clique aqui para ver o projeto rodando ao vivo!](https://vitru-seven.vercel.app/)**
+
 ## 📁 Estrutura do projeto
 
 ```bash
